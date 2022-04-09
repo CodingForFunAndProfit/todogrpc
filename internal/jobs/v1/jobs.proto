@@ -1,0 +1,28 @@
+syntax = "proto3";
+package jobs;
+option go_package = "github.com/CodingForFunAndProfit/todogrpc/internal/jobs/v1/jobs";
+
+message Todo {
+    bool completed = 1;
+    string description = 2;
+}
+
+message Todos {
+    repeated Todo todos = 1;
+}
+
+service TodoSvc {
+    rpc Add (Todos) returns (Response);
+    rpc Completed (CompletedRequest) returns (Response);
+    rpc List (Empty) returns (Todos);
+}
+
+message CompletedRequest {
+    int32 todo_number = 1;
+}
+
+message Empty {}
+
+message Response {
+    string message = 1;
+}
